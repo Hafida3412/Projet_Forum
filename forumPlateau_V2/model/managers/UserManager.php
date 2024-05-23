@@ -7,8 +7,8 @@ use App\DAO;
 class UserManager extends Manager{
 
     // on indique la classe POO et la table correspondante en BDD pour le manager concerné
-    protected $className = "Model\Entities\User";
-    protected $tableName = "user";
+    protected $className = "Model\Entities\Utilisateur";
+    protected $tableName = "utilisateur";
 
     public function __construct(){
         parent::connect();

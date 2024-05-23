@@ -7,8 +7,8 @@ use App\DAO;
 class CategoryManager extends Manager{
 
     // on indique la classe POO et la table correspondante en BDD pour le manager concerné
-    protected $className = "Model\Entities\Category";
-    protected $tableName = "category";
+    protected $className = "Model\Entities\Categorie";
+    protected $tableName = "categorie";
 
     public function __construct(){
         parent::connect();
