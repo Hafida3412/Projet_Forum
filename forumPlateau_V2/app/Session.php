@@ -33,6 +33,10 @@ class Session{
         $_SESSION["user"] = $user;
     }
 
+
+    /**
+     * La méthode suivante permet de vérifier qu'un utilisateur est bien connecté:
+     */
     public static function getUser(){
         return (isset($_SESSION['user'])) ? $_SESSION['user'] : false;
     }

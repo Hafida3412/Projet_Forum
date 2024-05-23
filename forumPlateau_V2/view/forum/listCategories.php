@@ -1,4 +1,10 @@
 <?php
+    
+/**
+ * on initialise une variable permettant de récupérer ce que nous renvoie le
+ * controller à l'index "catégories" du tableau de "data" 
+ */   
+ 
     $categories = $result["data"]['categories']; 
 ?>
 
