@@ -4,11 +4,11 @@ namespace Model\Managers;
 use App\Manager;
 use App\DAO;
 
-class CategoryManager extends Manager{
+class UtilisateurManager extends Manager{
 
     // on indique la classe POO et la table correspondante en BDD pour le manager concerné
-    protected $className = "Model\Entities\Categorie";
-    protected $tableName = "categorie";
+    protected $className = "Model\Entities\Utilisateur";
+    protected $tableName = "utilisateur";
 
     public function __construct(){
         parent::connect();
