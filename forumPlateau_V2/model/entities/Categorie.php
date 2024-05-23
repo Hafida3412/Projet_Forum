@@ -19,7 +19,6 @@ final class Categorie extends Entity{
         $this->hydrate($data);        
     }
 
-  
     public function getId()
     {
         return $this->id;
