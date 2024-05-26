@@ -69,11 +69,14 @@ final class Message extends Entity{
         return $this->dateCreationMessage;
     }
 
-
     public function setDateCreationMessage($dateCreationMessage)
     {
         $this->dateCreationMessage = $dateCreationMessage;
 
         return $this;
+    }
+
+    public function __toString(){
+        return $this->texte;
     }
 }
