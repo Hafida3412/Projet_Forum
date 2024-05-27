@@ -12,7 +12,7 @@
 
 <?php
 foreach($categories as $categorie ){ ?>
-    <p><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $categorie->getId() ?>"><?= $categorie->getCategorie() ?></a></p>
+    <p><a href="index.php?ctrl=forum&action=listSujetsByCategorie&id=<?= $categorie->getId() ?>"><?= $categorie->getCategorie() ?></a></p>
 <?php }
 
 
