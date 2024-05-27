@@ -6,6 +6,11 @@
 <h1>Liste des messages</h1>
 
 <?php
+
+if($messages) {
 foreach($messages as $message ){ ?>
-    <p><a href="index.php?ctrl=forum&action=MessagesBySujet&id=<?= $sujet->getId() ?>"<?= $sujet->getId() ?>><?= $sujet ?></a> par <?= $sujet->getUtilisateur() ?> (<?= $sujet->getDateCreationSujet() ?>)<br><?= $message->getTexte() ?></p>
+ <?= $sujet->getUtilisateur() ?> (<?= date('d-m-Y H:i:s', strtotime($message->getDateCreationMessage())) ?>)<br><?= $message->getTexte() ?></p>
 <?php }
+} else {
+    echo "<p>Pas de sujet pour le moment</p>";
+}

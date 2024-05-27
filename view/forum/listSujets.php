@@ -6,6 +6,10 @@
 <h1>Liste des sujets <?= $categorie->getCategorie() ?></h1>
 
 <?php
-foreach($sujets as $sujet ){ ?>
-    <p><a href="index.php?ctrl=forum&action=MessagesBySujet&id=<?= $sujet->getId() ?>"<?= $sujet->getId() ?>><?= $sujet ?></a> par <?= $sujet->getUtilisateur() ?> (<?= $sujet->getDateCreationSujet() ?>)</p>
-<?php }
+if($sujets) {
+    foreach($sujets as $sujet ){ ?>
+        <p><a href="index.php?ctrl=forum&action=MessagesBySujet&id=<?= $sujet->getId() ?>"<?= $sujet->getId() ?>><?= $sujet ?></a> par <?= $sujet->getUtilisateur() ?> (<?= date('d-m-Y H:i:s', strtotime($sujet->getDateCreationSujet())) ?>)</p>
+    <?php }
+} else {
+    echo "<p>Pas de sujet pour le moment</p>";
+}

@@ -6,7 +6,7 @@ use App\AbstractController;
 use App\ControllerInterface;
 use Model\Managers\CategorieManager;
 use Model\Managers\SujetManager;
-use Model\Managers\MessageManager;
+use Model\Managers\MessageManager;//rajout du Manager pour pouvoir afficher les messages
 
 class ForumController extends AbstractController implements ControllerInterface{
 
@@ -55,8 +55,8 @@ class ForumController extends AbstractController implements ControllerInterface{
             "view" => VIEW_DIR."forum/listMessages.php",
             "meta_description" => "Liste des messages par sujet : ".$sujet,
             "data" => [
-                "sujet" => $sujet,
-                "messages" =>$messages
+                "sujet" => $sujet,     //on reprend juste les entités dont on a besoin
+                "messages" =>$messages // 1 sujet(singulier) et des messages(pluriel)
             ]
         ];
     }
