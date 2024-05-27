@@ -7,5 +7,5 @@
 
 <?php
 foreach($messages as $message ){ ?>
-    <p><a href="index.php?ctrl=forum&action=MessagesBySujet&id=<?= $sujet->getId() ?>"<?= $sujet->getId() ?>><?= $sujet ?></a> par <?= $sujet->getUtilisateur() ?> (<?= $sujet->getDateCreationSujet() ?>)<?= $message->getTexte() ?></p>
+    <p><a href="index.php?ctrl=forum&action=MessagesBySujet&id=<?= $sujet->getId() ?>"<?= $sujet->getId() ?>><?= $sujet ?></a> par <?= $sujet->getUtilisateur() ?> (<?= $sujet->getDateCreationSujet() ?>)<br><?= $message->getTexte() ?></p>
 <?php }
