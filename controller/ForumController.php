@@ -60,4 +60,8 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
+
+    public function addNewMessage($id) {
+
+        
 }
