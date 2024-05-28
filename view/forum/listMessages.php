@@ -15,11 +15,9 @@ foreach($messages as $message ){ ?>
     echo "<p>Pas de sujet pour le moment</p>";
 }
 ?>
-<?php
 
-//<!-- Ajout du formulaire pour ajouter un nouveau message -->
+<!-- Ajout du formulaire pour ajouter un nouveau message -->
 
-?>
 <p> Créer un nouveau message</p>
 <?php
 
