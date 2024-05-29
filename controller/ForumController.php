@@ -59,9 +59,37 @@ class ForumController extends AbstractController implements ControllerInterface{
                 "messages" =>$messages // 1 sujet(singulier) et des messages(pluriel)
             ]
         ];
+     
     }
 
     public function addNewMessage($id) {
-
+        $messageManager = new MessageManager();
         
-}
+        if(Session::getUser()) {
+            if(isset($_POST['submit'])) {
+                $texte = filter_input(INPUT_POST, 'new_message',  FILTER_SANITIZE_SPECIAL_CHARS);
+                
+                if(!empty($texte)) {
+                    $data = [
+                        'texte' => $texte,
+                        'utilisateur_id' => Session::getUser()->getId(), 
+                        'sujet_id' => $id
+                    ];
+                    
+                    $messageManager->add($data);
+                    Session::addFlash("success", "Message ajouté avec succès");
+                } else {
+                    Session::addFlash("error", "Le texte du message ne peut pas être vide");
+                }
+            } else {
+                Session::addFlash("error", "Erreur lors de l'ajout du message");
+            }
+        
+            $this->redirectTo("forum", "MessagesBySujet", $id);
+        } else {
+            // Gérer le cas où aucun utilisateur n'est connecté
+            Session::addFlash("error", "Vous devez être connecté pour ajouter un message");
+            $this->redirectTo("auth", "login");
+        }
+    }
+}    
