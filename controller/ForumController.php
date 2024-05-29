@@ -93,5 +93,37 @@ class ForumController extends AbstractController implements ControllerInterface{
         }
     }
 
+    public function addNewSujet($id) {
+        $sujetManager = new SujetManager();
+        
+        if(Session::getUser()) {
+            if(isset($_POST['submit'])) {
+                $titre = filter_input(INPUT_POST, 'titre_sujet',  FILTER_SANITIZE_SPECIAL_CHARS);
+                $texte = filter_input(INPUT_POST, 'texte_sujet',  FILTER_SANITIZE_SPECIAL_CHARS);
+                
+                if(!empty($titre) && !empty($texte)) {
+                    $data = [
+                        'titre' => $titre,
+                        'texte' => $texte,
+                        'utilisateur_id' => Session::getUser()->getId(), 
+                        'categorie_id' => $id
+                    ];
+                    
+                    $sujetManager->add($data);
+                    Session::addFlash("success", "Sujet ajouté avec succès");
+                } else {
+                    Session::addFlash("error", "Le titre et le texte du sujet ne peuvent pas être vides");
+                }
+            } else {
+                Session::addFlash("error", "Erreur lors de l'ajout du sujet");
+            }
+        
+            $this->redirectTo("forum", "listSujetsByCategorie", $id);
+        } else {
+            // Gérer le cas où aucun utilisateur n'est connecté
+            Session::addFlash("error", "Vous devez être connecté pour ajouter un sujet");
+            $this->redirectTo("auth", "login");
+        }
+    }
     
 }    
