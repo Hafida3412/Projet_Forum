@@ -92,4 +92,6 @@ class ForumController extends AbstractController implements ControllerInterface{
             $this->redirectTo("auth", "login");
         }
     }
+
+    
 }    
