@@ -83,7 +83,7 @@ class SecurityController extends AbstractController{
             exit;  
         
                 } else {
-                    // Mauvais mot de passe
+                    // Erreur d'adresse mail ou de mot de passe
                     header("Location: index.php?ctrl=login");
                     exit;
                 }
