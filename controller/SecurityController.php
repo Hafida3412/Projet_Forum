@@ -4,6 +4,8 @@ namespace Controller;
 use App\AbstractController;
 use App\ControllerInterface;
 use PDO;
+use Model\Managers\UtilisateurManager;
+
 
 class SecurityController extends AbstractController{
 
@@ -11,7 +13,7 @@ class SecurityController extends AbstractController{
      // Affiche la vue du formulaire register
         //session_start();
     public function register(){
-       
+    
         if (isset($_POST["submitRegister"])) {
         
         //CONNEXION A LA BASE DE DONNEES:
@@ -54,13 +56,14 @@ class SecurityController extends AbstractController{
     }
 }
 }
-        // Afficher le formulaire d'inscription
-        include(VIEW_DIR."register.php");
-    }
-      
+     return [
+        "view" => VIEW_DIR . "connexion/register.php",
+        "meta_description" => "Formulaire d'inscription"
+];
+    }  
 
     public function login() {
-    if($_POST["submitLogin"]){
+    if(isset($_POST["submitLogin"])){
         //CONNEXION A LA BASE DE DONNEES:
         $pdo = new PDO("mysql: host=localhost; dbname=forum_hafida;charset=utf8", "root", "");
        
@@ -106,7 +109,11 @@ public function logout() {
     header("Location: index.php");
     exit;
 }
+
+
 }
+
+
 
         
 
