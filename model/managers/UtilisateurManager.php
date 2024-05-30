@@ -3,6 +3,7 @@ namespace Model\Managers;
 
 use App\Manager;
 use App\DAO;
+use Model\Managers\SujetManager;
 
 class UtilisateurManager extends Manager{
 

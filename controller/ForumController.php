@@ -7,6 +7,7 @@ use App\ControllerInterface;
 use Model\Managers\CategorieManager;
 use Model\Managers\SujetManager;
 use Model\Managers\MessageManager;//rajout du Manager pour pouvoir afficher les messages
+use Model\Managers\UtilisateurManager;
 
 class ForumController extends AbstractController implements ControllerInterface{
 
@@ -36,7 +37,7 @@ class ForumController extends AbstractController implements ControllerInterface{
 
         return [
             "view" => VIEW_DIR."forum/listSujets.php",
-            "meta_description" => "Liste des topics par catégorie : ".$categorie,
+            "meta_description" => "Liste des sujets par catégorie : ".$categorie,
             "data" => [
                 "categorie" => $categorie,
                 "sujets" => $sujets
@@ -61,5 +62,8 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
      
     }
-   
+    
+    // ajouter un sujet
+    
+    
 }    
