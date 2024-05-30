@@ -32,28 +32,33 @@ class SecurityController extends AbstractController{
            $utilisateur = $requete->fetch();
            //SI L UTILISATEUR EXISTE
            if($utilisateur){
-               header("Location: index.php?action=register"); exit; 
+               header("Location: index.php?ctrl=register"); 
+           exit; 
            } else {
                //var dump("utilisateur inexistant");die;
                //insertion de l'utilisateur en BDD
            if($pass1 == $pass2 && strlen($pass1) >= 5) {//VERIFICATION QUE LES MDP SONT IDENTIQUES
                $insertUser = $pdo->prepare("INSERT INTO utilisateur (pseudo, email, password) VALUES (:pseudo, :email, :password)");
                $insertUser->execute([
-                   "pseudo" => $pseudo,
-                   "email" => $email,
-                   "password" => password_hash($pass1, PASSWORD_DEFAULT)// MDP HASHE
-               ]);
-               header("Location: index.php?action=login.php"); exit;
-                } else {
-                    //message "Les MDP ne sont pas identiques ou MDP trop court!
-                }
-            }
-            } else {
-                //problème de saisie dans les champs de formulaire
-            }
-      
+                "pseudo" =>"pseudo",
+                "email" => "email",
+                "password" => password_hash($pass1, PASSWORD_DEFAULT)
+            ]);
+            //REDIRECTION APRES L INSCRIPTION
+            header("Location: index.php?ctrl=login");
+            exit;
+        } else {
+            header("Location: index.php?ctrl=register");
+            exit;
         }
     }
+}
+}
+        // Afficher le formulaire d'inscription
+        include(VIEW_DIR."register.php");
+    }
+      
+
     public function login() {
     if($_POST["submitLogin"]){
         //CONNEXION A LA BASE DE DONNEES:
@@ -71,26 +76,35 @@ class SecurityController extends AbstractController{
             //si l'utilisateur existe
             if($utilisateur){
                 $hash = $utilisateur["password"];
-                if(password_verify($password, $hash)){//VERIFICATION DU MDP
+                if(password_verify($_POST["password"], $hash)){//VERIFICATION DU MDP
             $_SESSION["utilisateur"] = $utilisateur; //on stocke dans un tableau SESSION l'intégralité des infos du user
             header("Location:index.php?ctrl=home&action=index&id=");//SI CONNEXION REUSSIE: REDIRECTION VERS PAGE D ACCUEIL
 //Dans Forum, la redirection sera par exemple: header("Location: index.php?ctrl=home&action=index&id=");    
-               } else {
-                header("Location: index.php?action=login.php"); exit;
-            // message utilisateur inconnu ou MDP incorrect
-               }
+            exit;  
+        
+                } else {
+                    // Mauvais mot de passe
+                    header("Location: index.php?ctrl=login");
+                    exit;
+                }
             } else {
-             // message utilisateur inconnu ou MDP incorrect
-               header("Location: index.php?action=login.php"); exit;  
+                // Utilisateur introuvable
+                header("Location: index.php?ctrl=login");
+                exit;
             }
-        } 
-    
+        }
+
+        // Afficher le formulaire de connexion
+        include(VIEW_DIR."login.php");
     }
+    
+    
 }
 public function logout() {
-    unset($_SESSION["utilisateur"]);//SUPPRESSION DE TOUT LE TABLEAU POUR POUVOIR SE DECONNECTER
-            header("Location: home.php"); exit;
-    
+    session_unset();// Supprimer toutes les données de la session
+    // Redirection après la déconnexion
+    header("Location: index.php");
+    exit;
 }
 }
 
