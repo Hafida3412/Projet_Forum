@@ -49,6 +49,7 @@ class SecurityController extends AbstractController{
                         } else {
                             header("Location: index.php?ctrl=security&action=register");
                             exit;
+                            // $this->redirectTo("security","register")
                         }
                     }
                 }
@@ -63,24 +64,25 @@ class SecurityController extends AbstractController{
 
     public function login() {
 
-            if(isset($_POST["submitLogin"]))
+            if(isset($_POST["submitLogin"])) {
        
-                   //PROTECTION XSS (=FILTRES)
-                    $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
-                    $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                //PROTECTION XSS (=FILTRES)
+                $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
+                $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     
                 if($email && $password) {//REQUETE PREPARE POUR LUTTER CTRE LES INJECTIONS SQL
-                    //var_dump($user);die;
+                    // var_dump("ok");die;
                     //si l'utilisateur existe
                     $userManager = new UtilisateurManager();
                     $utilisateur = $userManager->checkUserExists($email);
-                    
-                    if($utilisateur){
-                        $hash = $utilisateur["password"];
 
-                        if(password_verify($_POST["password"], $hash)){//VERIFICATION DU MDP
+                    if($utilisateur){
+                        // var_dump($utilisateur);die;
+                        $hash = $utilisateur->getPassword();
+
+                        if(password_verify($password, $hash)){//VERIFICATION DU MDP
                             $_SESSION["utilisateur"] = $utilisateur; //on stocke dans un tableau SESSION l'intégralité des infos du user
-                            header("Location:index.php?ctrl=home&action=index&id=");//SI CONNEXION REUSSIE: REDIRECTION VERS PAGE D ACCUEIL
+                            header("Location:index.php?ctrl=home&action=index");//SI CONNEXION REUSSIE: REDIRECTION VERS PAGE D ACCUEIL
                         //Dans Forum, la redirection sera par exemple: header("Location: index.php?ctrl=home&action=index&id=");    
                             exit;  
                         
@@ -97,16 +99,20 @@ class SecurityController extends AbstractController{
                     }
 
                 // Afficher le formulaire de connexion
-                include(VIEW_DIR."connexion/login.php");
+            }
+            return [
+                "view" => VIEW_DIR . "connexion/login.php",
+                "meta_description" => "Formulaire de connexion"
+            ];
     }
     
     
-      public function logout() {
-      session_unset();// Supprimer toutes les données de la session
-    // Redirection après la déconnexion
-      header("Location: index.php");
-      exit;
-}
+    public function logout() {
+        session_unset();// Supprimer toutes les données de la session
+        // Redirection après la déconnexion
+        header("Location: index.php");
+        exit;
+    }
 
 }
 

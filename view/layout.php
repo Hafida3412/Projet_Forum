@@ -20,11 +20,6 @@
                     <nav>
                         <div id="nav-left">
                             <a href="/">Accueil</a>
-                            <?php
-                            if(App\Session::isAdmin()){
-                                ?>
-                                <a href="index.php?ctrl=home&action=utilisateurs">Voir la liste des gens</a>
-                            <?php } ?>
                         </div>
                         <div id="nav-right">
                         <?php
