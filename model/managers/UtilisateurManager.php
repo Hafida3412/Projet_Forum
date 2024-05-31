@@ -14,4 +14,17 @@ class UtilisateurManager extends Manager{
     public function __construct(){
         parent::connect();
     }
+
+    public function checkUserExists($email) {//permet de vérifier si l'utilisateur existe via son mail
+        $sql ="SELECT * 
+                FROM ".$this->tableName. " t
+                WHERE email = :email";
+
+        // la requête renvoie un objet ou rien --> getOneOrNullResult (cf fonctions dans Manager)
+        return  $this->getOneOrNullResult(
+            DAO::select($sql, ['email' => $email]), 
+            $this->className
+        );
+    }
+
 }
