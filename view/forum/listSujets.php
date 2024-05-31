@@ -1,9 +1,10 @@
 <?php
     $categorie = $result["data"]['categorie']; 
     $sujets = $result["data"]['sujets']; 
+    // var_dump ($categorie);die;
 ?>
 <br>
-<h1>Liste des sujets <?= $categorie->getCategorie() ?></h1>
+<h1>Liste des sujets <?= $categorie->getCategorie()?></h1>
 <br>
 <?php
 if($sujets) {

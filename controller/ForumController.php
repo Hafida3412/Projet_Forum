@@ -74,13 +74,21 @@ class ForumController extends AbstractController implements ControllerInterface{
             $titre = filter_input(INPUT_POST, 'titre', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $texte = filter_input(INPUT_POST, 'texte', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             
-            $sujet_id = $sujetManager->add([
+            $sujet_id = $sujetManager->add([//on ne rajoute pas la date de création car c'est un current_times
                 "titre" => $titre,
                 "categorie_id" => $id,
                 "utilisateur_id" => Session::getUtilisateur(),//ça reprend le fichier session/ on écrit Session :: car ça reprend la session "static" utilisateur
             ]);
+            
+
+            $message_id = $messageManager->add([
+                "texte" => $texte,
+                "utilisateur_id" => Session::getUtilisateur(),
+                "sujet_id" => $sujet_id,
+            ]);
     }
-        
+       $this->redirectTo("forum", "listSujetsByCategorie", $id);
+
     }
     
 }
