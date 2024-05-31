@@ -63,7 +63,24 @@ class ForumController extends AbstractController implements ControllerInterface{
      
     }
     
-    // ajouter un sujet
+        // ajouter un sujet
+    public function addNewSujet($id) {// correspond à l'id categorie
+
+        $sujetManager = new SujetManager();
+        $messageManager = new MessageManager();
+
+        
+        if(isset($_POST["submit"])) {
+            $titre = filter_input(INPUT_POST, 'titre', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $texte = filter_input(INPUT_POST, 'texte', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            $sujet_id = $sujetManager->add([
+                "titre" => $titre,
+                "categorie_id" => $id,
+                "utilisateur_id" => Session::getUtilisateur(),//ça reprend le fichier session/ on écrit Session :: car ça reprend la session "static" utilisateur
+            ]);
+    }
+        
+    }
     
-    
-}    
+}

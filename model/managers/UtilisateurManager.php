@@ -22,7 +22,7 @@ class UtilisateurManager extends Manager{
 
         // la requête renvoie un objet ou rien --> getOneOrNullResult (cf fonctions dans Manager)
         return  $this->getOneOrNullResult(
-            DAO::select($sql, ['email' => $email], false), 
+            DAO::select($sql, ['email' => $email], false), //on rajoute "false" car la  public static function select dans DAO renvoie des réponses multiples "true"
             $this->className
         );
     }

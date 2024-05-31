@@ -18,11 +18,11 @@ if($sujets) {
 <!-- Ajout du formulaire pour ajouter un nouveau sujet -->
 <div>
     <form action="?ctrl=Forum&action=addNewSujet&id=<?= $categorie->getId() ?>" method="post">
-        <label for="titre_sujet">Titre du sujet :</label><br>
-        <input type="text" name="titre_sujet"><br>
+        <label for="titre">Titre du sujet :</label><br>
+        <input type="texte" name="titre"><br>
         
-        <label for="texte_sujet">Contenu du sujet :</label><br>
-        <textarea name="texte_sujet" rows="4" cols="50"></textarea><br>
+        <label for="texte">Contenu du sujet :</label><br>
+        <textarea name="texte" rows="4" cols="50"></textarea><br>
         
         <input type="submit" name="submit" value="Ajouter un sujet">
     </form>
