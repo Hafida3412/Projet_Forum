@@ -27,6 +27,7 @@
                             if(App\Session::getUtilisateur()){
                                 ?>
                                 <a href="index.php?ctrl=security&action=profile"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUtilisateur()?></a>
+                                <a href="index.php?ctrl=forum&action=index">Liste des catégories</a>
                                 <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
                                 <?php
                             }

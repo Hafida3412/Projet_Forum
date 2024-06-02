@@ -23,6 +23,6 @@ foreach($messages as $message ){ ?>
 
 ?>
 <form action="?ctrl=Forum&action=addNewMessage&id=<?= $sujet->getId() ?>" method="post">
-    <textarea name="new_message" rows="4" cols="50"></textarea><br>
+    <textarea name="texte" rows="4" cols="50"></textarea><br>
     <input type="submit" name = "submitMessage" value="Ajouter un message">
 </form>

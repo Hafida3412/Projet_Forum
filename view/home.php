@@ -5,5 +5,5 @@
 <p>
     <a href="index.php?ctrl=security&action=login">Se connecter</a>
     <a href="index.php?ctrl=security&action=register">S'inscrire</a>
-    <a href="index.php?ctrl=forum&action=index">Liste des catégories</a>
+
 </p>

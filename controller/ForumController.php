@@ -68,27 +68,50 @@ class ForumController extends AbstractController implements ControllerInterface{
 
         $sujetManager = new SujetManager();
         $messageManager = new MessageManager();
-
         
         if(isset($_POST["submit"])) {
             $titre = filter_input(INPUT_POST, 'titre', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $texte = filter_input(INPUT_POST, 'texte', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             
+                                     //ON AJOUTE LE NOUVEAU SUJET
             $sujet_id = $sujetManager->add([//on ne rajoute pas la date de création car c'est un current_times
                 "titre" => $titre,
                 "categorie_id" => $id,
+                //ON AJOUTE EGALEMENT L UTILISATEUR QUI CREE LE SUJET
                 "utilisateur_id" => Session::getUtilisateur(),//ça reprend le fichier session/ on écrit Session :: car ça reprend la session "static" utilisateur
             ]);
-            
-
-            $message_id = $messageManager->add([
+        
+            $messageManager->add([
                 "texte" => $texte,
                 "utilisateur_id" => Session::getUtilisateur(),
                 "sujet_id" => $sujet_id,
             ]);
-    }
+        
+            }
+    
        $this->redirectTo("forum", "listSujetsByCategorie", $id);
 
     }
-    
+
+    //Ajouter un message
+    public function addNewMessage($id){
+
+        $messageManager = new MessageManager();
+        
+    if (isset($_POST["submitMessage"])) {
+        $texte = filter_input(INPUT_POST, 'texte', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        $messageManager->add([
+            "texte" => $texte,
+            "utilisateur_id" => Session::getUtilisateur(),
+            "sujet_id" => $id,
+        ]);
+    }
+    $this->redirectTo("forum", "MessagesBySujet", $id);
 }
+        
+}
+
+           
+
+
