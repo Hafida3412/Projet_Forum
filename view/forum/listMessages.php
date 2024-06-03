@@ -23,7 +23,16 @@ foreach($messages as $message ){ ?>
 <?php
 
 ?>
+
+<?php
+    if(!$sujet->getVerrouillage()) {
+?>
+
 <form action="?ctrl=Forum&action=addNewMessage&id=<?= $sujet->getId() ?>" method="post">
     <textarea name="texte" rows="4" cols="50"></textarea><br>
     <input type="submit" name = "submitMessage" value="Ajouter un message">
 </form>
+
+<?php } else {
+    echo "<p>Vous ne pouvez plus poster car ce sujet est verrouillé !</p>";   
+}?>

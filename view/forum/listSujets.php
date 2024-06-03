@@ -1,4 +1,6 @@
 <?php
+use Model\Entities\Utilisateur;
+
     $categorie = $result["data"]['categorie']; 
     $sujets = $result["data"]['sujets']; 
     // var_dump ($categorie);die;
@@ -7,17 +9,35 @@
 <h1>Liste des sujets <?= $categorie->getCategorie()?></h1>
 <br>
 <?php
+
 if($sujets) {
     foreach($sujets as $sujet ){ ?>
-        <p><a href="index.php?ctrl=forum&action=listSujetsByCategorie&id="> 
+    <?php
+        ?><p><a href="index.php?ctrl=forum&action=MessagesBySujet&id=<?= $sujet->getId() ?>"> 
         <?= $sujet ?></a> par <?= $sujet->getUtilisateur() ?> 
         (<?= date('d-m-Y H:i:s', strtotime($sujet->getDateCreationSujet())) ?>)</p>
+
+        <?php
+            // si l'utilisateur est connecté
+            if(App\Session::getUtilisateur()) {
+                // si l'id de l'utilisateur du sujet = id de l'utilisateur connecté 
+                if(App\Session::getUtilisateur()->getId() == $sujet->getUtilisateur()->getId()) {
+                ?>
+                    <a href="index.php?ctrl=forum&action=">Verrouiller</a>
+                <?php
+                }
+            }
+        ?>
     
     <br><?php }
-} else {
+
+}
+else {
     echo "<p>Pas de sujet pour le moment</p>";
 }
 ?>
+
+
 
 <!-- Ajout du formulaire pour ajouter un nouveau sujet -->
 <div>
