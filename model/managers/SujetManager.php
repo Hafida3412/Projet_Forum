@@ -27,4 +27,16 @@ class SujetManager extends Manager{
             $this->className
         );
     }
+
+    public function lockSujet($id){
+        $sql ="UPDATE sujet
+               SET verrouillage = '1'
+               WHERE id_sujet = :id";
+
+        return $this->getOneOrNullResult(
+            DAO::update($sql, ['id' => $id]), //DAO::update et non select (cf DAO.php)        
+            $this->className
+        );
+
+    }
 }

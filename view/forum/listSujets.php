@@ -9,8 +9,8 @@
 <?php
 if($sujets) {
     foreach($sujets as $sujet ){ ?>
-        <p><a href="index.php?ctrl=forum&action=MessagesBySujet&id="<?= $sujet->getId() ?>" ></a>
-        <?= $sujet->getId() ?>><?= $sujet ?></a> par <?= $sujet->getUtilisateur() ?> 
+        <p><a href="index.php?ctrl=forum&action=listSujetsByCategorie&id=" ></a>Verrouiller</button><?= $sujet->getId() ?> >
+        <?= $sujet ?></a> par <?= $sujet->getUtilisateur() ?> 
         (<?= date('d-m-Y H:i:s', strtotime($sujet->getDateCreationSujet())) ?>)</p>
     
     <br><?php }
