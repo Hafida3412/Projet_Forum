@@ -28,8 +28,8 @@ class SujetManager extends Manager{
         );
     }
 
-
-    public function lockSujet($id){
+        //fonction pour verrouiller un sujet
+    public function lockSujet($id){//requête SQL pour update un sujet:
         $sql = "UPDATE sujet
                SET verrouillage = '1'
                WHERE id_sujet = :id";

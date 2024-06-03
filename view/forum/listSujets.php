@@ -37,8 +37,6 @@ else {
 }
 ?>
 
-
-
 <!-- Ajout du formulaire pour ajouter un nouveau sujet -->
 <div>
     <form action="?ctrl=Forum&action=addNewSujet&id=<?= $categorie->getId() ?>" method="post">
