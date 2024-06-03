@@ -9,7 +9,8 @@
 
 if($messages) {
 foreach($messages as $message ){ ?>
- <?= $sujet->getUtilisateur() ?> (<?= date('d-m-Y H:i:s', strtotime($message->getDateCreationMessage())) ?>)<br><?= $message->getTexte() ?><br><br></p>
+ <button> <a href="index.php?ctrl=forum&action=MessagesBySujet&id= "></a>Verrouiller</button><?= $sujet->getUtilisateur() ?> 
+ (<?= date('d-m-Y H:i:s', strtotime($message->getDateCreationMessage())) ?>)<br><?= $message->getTexte() ?><br><br></p>
 <?php }
 } else {
     echo "<p>Pas de sujet pour le moment</p>";

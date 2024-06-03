@@ -9,9 +9,10 @@
 <?php
 if($sujets) {
     foreach($sujets as $sujet ){ ?>
-        <p><a href="index.php?ctrl=forum&action=MessagesBySujet&id=<?= $sujet->getId() ?>"
+        <p><a href="index.php?ctrl=forum&action=MessagesBySujet&id="<?= $sujet->getId() ?>" ></a>
         <?= $sujet->getId() ?>><?= $sujet ?></a> par <?= $sujet->getUtilisateur() ?> 
         (<?= date('d-m-Y H:i:s', strtotime($sujet->getDateCreationSujet())) ?>)</p>
+    
     <br><?php }
 } else {
     echo "<p>Pas de sujet pour le moment</p>";
@@ -30,3 +31,4 @@ if($sujets) {
         <input type="submit" name="submit" value="Ajouter un sujet">
     </form>
 </div>
+    
