@@ -121,28 +121,20 @@ class ForumController extends AbstractController implements ControllerInterface{
 
         $sujetManager = new SujetManager();
 
-        if(isset($_POST['lockSujet'])){
+        if(isset($_POST['updateSubmit'])){
             $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $texte = filter_input(INPUT_POST, "texte", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             
             if($titre && $texte){
-                
                 $sujetManager->lockSujet($id);
-            
-                $msg = "Sujet modifié !";
-                Session::addFlash('success', $msg);
-                
-                $this->redirectTo('forum');
-            } else {
-
-                $msg = "Error !";
-                Session::addFlash('error', $msg);
-                
-                $this->redirectTo('forum');
-            }
-        }
+                $this->redirectTo('forum', 'listSujetsByCategorie');
+              } else {
+        echo "Erreur lors du verrouillage du sujet";
+    }
+        
+    }
             return [
-                    "view" => VIEW_DIR."forum/updateSujet.php", 
+                    "view" => VIEW_DIR."forum/listSujet.php", 
                     "data" => [
                         "sujets" => $sujetManager->findOneById($id)
                     ]
