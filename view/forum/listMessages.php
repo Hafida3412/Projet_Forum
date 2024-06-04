@@ -25,7 +25,7 @@ foreach($messages as $message ){ ?>
 ?>
 
 <?php
-    if(!$sujet->getVerrouillage()) {
+    if(!$sujet->getVerrouillage()) {//Si le sujet est verrouillé
 ?>
 
 <form action="?ctrl=Forum&action=addNewMessage&id=<?= $sujet->getId() ?>" method="post">
