@@ -8,22 +8,25 @@
 <?php
 
 if($messages) {
-foreach($messages as $message ){ 
- ?><?= $sujet->getUtilisateur() ?>
- (<?= date('d-m-Y H:i:s', strtotime($message->getDateCreationMessage())) ?>)<br>
- <?= $message->getTexte() ?><br><br>
-<?php }
+    foreach($messages as $message ){ 
+        ?><?= $sujet->getUtilisateur() ?>
+        (<?= date('d-m-Y H:i:s', strtotime($message->getDateCreationMessage())) ?>)<br>
+        <?= $message->getTexte() ?><br><br>
+
+        <?php
             // si l'utilisateur est connecté
             if(App\Session::getUtilisateur()) {
                 // si l'id de l'utilisateur du message = id de l'utilisateur connecté 
                 if(App\Session::getUtilisateur()->getId() == $message->getUtilisateur()->getId()) {
-                 ?>
-                    <a href="index.php?ctrl=forum&action=supprimerMessage&id=<?=$message->getId() ?>">Supprimer</a>
+                ?>
+                    <a href="index.php?ctrl=forum&action=supprimerMessage&id=<?=$message->getId() ?>">Supprimer</a><br>
                     <?php   
                 }
                 
             }
-        } else {
+        ?>
+    <?php }
+} else {
     echo "<p>Pas de message à supprimer pour le moment</p>";
    }
 
