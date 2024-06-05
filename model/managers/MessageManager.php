@@ -24,6 +24,17 @@ class MessageManager extends Manager{
             $this->className
         );
     }
+        
 
+    public function deleteSujet($id) {
+        $sql ="DELETE
+                FROM ".$this->tableName. " t
+                WHERE sujet_id = :id";
+
+        return  $this->getOneOrNullResult(
+            DAO::delete($sql, ['id' => $id]), 
+            $this->className
+        );
+    }
 
 }

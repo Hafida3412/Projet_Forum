@@ -36,3 +36,5 @@ foreach($messages as $message ){ ?>
 <?php } else {
     echo "<p>Vous ne pouvez plus poster car ce sujet est verrouillé !</p>";   
 }?>
+
+
