@@ -22,9 +22,13 @@ if($sujets) {
             if(App\Session::getUtilisateur()) {
                 // si l'id de l'utilisateur du sujet = id de l'utilisateur connecté 
                 if(App\Session::getUtilisateur()->getId() == $sujet->getUtilisateur()->getId()) {
+                    if($sujet->getVerrouillage() == 0) {
                 ?>
-                    <a href="index.php?ctrl=forum&action=">Verrouiller</a>
-                <?php
+                    <a href="index.php?ctrl=forum&action=verrouillerSujet&id=<?= $sujet->getId() ?>">Verrouiller</a>
+                    <?php
+                    } else { ?>
+                        <a href="index.php?ctrl=forum&action=deverrouillerSujet&id=<?= $sujet->getId() ?>">Déverrouiller</a>
+                <?php }
                 }
             }
         ?>

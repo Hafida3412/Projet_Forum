@@ -117,32 +117,34 @@ class ForumController extends AbstractController implements ControllerInterface{
 
     //Verrouiller un sujet
 
-    public function updateSujet($id){
-
-        $sujetManager = new SujetManager();
-
-        if(isset($_POST['updateSubmit'])){
-            $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $texte = filter_input(INPUT_POST, "texte", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            
-            if($titre && $texte){
-                $sujetManager->lockSujet($id);
-                $this->redirectTo('forum', 'listSujetsByCategorie');
-              } else {
-        echo "Erreur lors du verrouillage du sujet";
-    }
+    public function verrouillerSujet ($id){
         
-    }
-            return [
-                    "view" => VIEW_DIR."forum/listSujet.php", 
-                    "data" => [
-                        "sujets" => $sujetManager->findOneById($id)
-                    ]
-            ];
-    }
+        $sujetManager = new SujetManager();
+        $sujet = $sujetManager->findOneById($id);
 
-
+        // si l'utilisateur est connecté
+        if(Session::getUtilisateur()) {
+            // si l'id de l'utilisateur du sujet = id de l'utilisateur connecté 
+            if(Session::getUtilisateur()->getId() == $sujet->getUtilisateur()->getId()) {
+                $sujetManager->lockSujet($id);
+                $this->redirectTo("forum", "listSujetsByCategorie", $sujet->getCategorie()->getId());
+            }
+        }
+         else {
+            echo "Erreur lors du verrouillage du sujet";
+        }
+        
+        return [
+            "view" => VIEW_DIR."forum/listSujetsByCategorie.php", 
+            "data" => [
+                "sujets" => $sujetManager->findOneById($id)
+            ]
+        ];
+    }
 }
+
+
+
 
     
 
