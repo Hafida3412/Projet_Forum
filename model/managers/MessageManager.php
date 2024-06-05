@@ -26,10 +26,10 @@ class MessageManager extends Manager{
     }
         
 
-    public function deleteSujet($id) {
+    public function deleteMessage($id) {
         $sql ="DELETE
                 FROM ".$this->tableName. " t
-                WHERE sujet_id = :id";
+                WHERE id_message = :id";
 
         return  $this->getOneOrNullResult(
             DAO::delete($sql, ['id' => $id]), 

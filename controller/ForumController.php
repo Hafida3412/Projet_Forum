@@ -119,20 +119,20 @@ class ForumController extends AbstractController implements ControllerInterface{
     //Supprimer un message
 
      public function supprimerMessage($id){
-        $messageManager = new SujetManager();
+        $messageManager = new messageManager();
         $message = $messageManager->findOneById($id);
 
         // si l'utilisateur est connecté
         if(Session::getUtilisateur()) {
             // si l'id de l'utilisateur du message = id de l'utilisateur connecté 
             if(Session::getUtilisateur()->getId() == $message->getUtilisateur()->getId()) {
-                $messageManager->lockSujet($id);//on récupére la fonction lockSujet de SujetManager 
+                $messageManager->deleteMessage($id);//on récupére la fonction 
                 $this->redirectTo("forum", "MessagesBySujet&id", $message->getSujet()->getId());
             }  
             return [
                 "view" => VIEW_DIR."forum/MessagesBySujet&id.php", 
                 "data" => [
-                    "sujets" => $sujetManager->findOneById($id)
+                    "sujets" => $messageManager->findOneById($id)
                 ]
             ];
     

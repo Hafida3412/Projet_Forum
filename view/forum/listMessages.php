@@ -9,13 +9,25 @@
 
 if($messages) {
 foreach($messages as $message ){ 
-    ?><?= $sujet->getUtilisateur() ?>
+ ?><?= $sujet->getUtilisateur() ?>
  (<?= date('d-m-Y H:i:s', strtotime($message->getDateCreationMessage())) ?>)<br>
- <?= $message->getTexte() ?><button>Supprimer</button><br><br>
+ <?= $message->getTexte() ?><br><br>
 <?php }
-} else {
-    echo "<p>Pas de message pour le moment</p>";
-}
+            // si l'utilisateur est connecté
+            if(App\Session::getUtilisateur()) {
+                // si l'id de l'utilisateur du message = id de l'utilisateur connecté 
+                if(App\Session::getUtilisateur()->getId() == $message->getUtilisateur()->getId()) {
+                 ?>
+                    <a href="index.php?ctrl=forum&action=supprimerMessage&id=<?=$message->getId() ?>">Supprimer</a>
+                    <?php   
+                }
+                
+            }
+        } else {
+    echo "<p>Pas de message à supprimer pour le moment</p>";
+   }
+
+
 ?>
 
 <!-- Ajout du formulaire pour ajouter un nouveau message -->
