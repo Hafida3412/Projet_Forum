@@ -141,6 +141,31 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
+
+    public function deverrouillerSujet ($id){
+        
+        $sujetManager = new SujetManager();
+        $sujet = $sujetManager->findOneById($id);
+
+        // si l'utilisateur est connecté
+        if(Session::getUtilisateur()) {
+            // si l'id de l'utilisateur du sujet = id de l'utilisateur connecté 
+            if(Session::getUtilisateur()->getId() == $sujet->getUtilisateur()->getId()) {
+                $sujetManager->unlockSujet($id);
+                $this->redirectTo("forum", "listSujetsByCategorie", $sujet->getCategorie()->getId());
+            }
+        }
+         else {
+            echo "Erreur lors du déverrouillage du sujet";
+        }
+        
+        return [
+            "view" => VIEW_DIR."forum/listSujetsByCategorie.php", 
+            "data" => [
+                "sujets" => $sujetManager->findOneById($id)
+            ]
+        ];
+    }
 }
 
 
