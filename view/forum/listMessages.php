@@ -14,7 +14,7 @@ foreach($messages as $message ){
  <?= $message->getTexte() ?><button>Supprimer</button><br><br>
 <?php }
 } else {
-    echo "<p>Pas de sujet pour le moment</p>";
+    echo "<p>Pas de message pour le moment</p>";
 }
 ?>
 
