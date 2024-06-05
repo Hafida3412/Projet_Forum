@@ -126,8 +126,8 @@ class ForumController extends AbstractController implements ControllerInterface{
         if(Session::getUtilisateur()) {
             // si l'id de l'utilisateur du sujet = id de l'utilisateur connecté 
             if(Session::getUtilisateur()->getId() == $sujet->getUtilisateur()->getId()) {
-                $sujetManager->lockSujet($id);
-                $this->redirectTo("forum", "listSujetsByCategorie", $sujet->getCategorie()->getId());
+                $sujetManager->lockSujet($id);//on récupére la fonction lockSujet de SujetManager 
+                $this->redirectTo("forum", "listSujetsByCategorie", $sujet->getCategorie()->getId());//on récupère l'id de la catégorie du sujet
             }
         }
          else {
@@ -141,6 +141,8 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
+    
+    //Déverrouiller le sujet
 
     public function deverrouillerSujet ($id){
         

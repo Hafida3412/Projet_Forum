@@ -41,6 +41,7 @@ class SujetManager extends Manager{
 
     }
 
+        //fonction pour déverrouiller un sujet
     public function unlockSujet($id){//requête SQL pour update un sujet:
         $sql = "UPDATE sujet
                SET verrouillage = '0'
