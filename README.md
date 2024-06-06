@@ -3,9 +3,15 @@
 <p align="left"> L'objectif de cet exercice est d'élaborer la structure fonctionnelle d'un forum en ligne classique, en utilisant les langages HTML, CSS et PHP.</p>
 
 <p align="left"> Mise en place du MCD </p>
-
+<img width="912" alt="image" src="https://github.com/Hafida3412/Projet_Forum/assets/160515207/4ae2a596-b5a8-425d-9f8a-a08897bfeb1c">
+<br>
+<br>
+<br>
 <p align="left"> Création de la base de données SQL </p>
-<p align="left"> Maquettage </p>
+<img width="734" alt="image" src="https://github.com/Hafida3412/Projet_Forum/assets/160515207/00be3988-7a91-444c-8b1c-314ef3d518c0">
+<br>
+<br>
+<br>
 <p align="left"> Résultat général avec toutes les fonctionnalités: </p>
 <img width="730" alt="image" src="https://github.com/Hafida3412/Projet_Forum/assets/160515207/41ddf281-54e2-4608-936e-1b22c0b64b9d">
 <br>
