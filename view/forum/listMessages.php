@@ -19,7 +19,7 @@ if($messages) {
                 // si l'id de l'utilisateur du message = id de l'utilisateur connecté 
                 if(App\Session::getUtilisateur()->getId() == $message->getUtilisateur()->getId()) {
                 ?>
-                    <a href="index.php?ctrl=forum&action=supprimerMessage&id=<?=$message->getId() ?>">Supprimer</a><br>
+                    <a href="index.php?ctrl=forum&action=supprimerMessage&id=<?=$message->getId() ?>"><button>Supprimer</button></a><br>
                     <?php   
                 }
                 

@@ -24,10 +24,10 @@ if($sujets) {
                 if(App\Session::getUtilisateur()->getId() == $sujet->getUtilisateur()->getId()) {
                     if($sujet->getVerrouillage() == 0) {
                 ?>
-                    <a href="index.php?ctrl=forum&action=verrouillerSujet&id=<?= $sujet->getId() ?>">Verrouiller</a>
+                    <a href="index.php?ctrl=forum&action=verrouillerSujet&id=<?= $sujet->getId() ?>"><button>Verrouiller</button></a>
                     <?php
                     } else { ?>
-                        <a href="index.php?ctrl=forum&action=deverrouillerSujet&id=<?= $sujet->getId() ?>">Déverrouiller</a>
+                        <a href="index.php?ctrl=forum&action=deverrouillerSujet&id=<?= $sujet->getId() ?>"><button>Déverrouiller</button></a>
                 <?php }
                 }
             }
