@@ -80,16 +80,16 @@ a {
     display: none;
 }
 
-.supprimer-button {
-    background-color: rgb(190, 0, 0);
+button {
+    background-color: rgb(0, 91, 122);
     color: white;
     padding: 5px 10px;
     border: none;
     cursor: pointer;
 }
 
-.supprimer-button:hover {
-    background-color: rgb(140, 0, 0);
+button:hover {
+    background-color: rgb(1, 66, 88);
 }
 
 .post {
