@@ -6,7 +6,7 @@
 }
 
 h1 {
-    color: rgb(0, 122, 156);
+    color: rgb(0, 156, 151);
 }
 
 #wrapper {
@@ -15,7 +15,7 @@ h1 {
 }
 
 header {
-    background-color: rgb(0, 122, 90);
+    background-color: rgb(0, 91, 122);
     color: white;
     padding: 10px;
     text-align: center;
@@ -38,7 +38,7 @@ nav a {
 }
 
 footer {
-    background-color: rgb(0, 122, 90);
+    background-color: rgb(0, 91, 122);
     color: white;
     text-align: center;
     padding: 10px;
@@ -58,7 +58,7 @@ textarea {
 }
 
 input[type="submit"] {
-    background-color: rgb(0, 122, 90);
+    background-color: rgb(0, 91, 122);
     color: white;
     padding: 5px 15px;
     border: none;
@@ -70,7 +70,7 @@ p {
 }
 
 a {
-    color: rgb(0, 122, 90);
+    color: rgb(0, 156, 151);
     text-decoration: none;
 }
 
@@ -80,7 +80,7 @@ a {
     display: none;
 }
 
-.delete-btn {
+.supprimer-button {
     background-color: rgb(190, 0, 0);
     color: white;
     padding: 5px 10px;
@@ -88,7 +88,7 @@ a {
     cursor: pointer;
 }
 
-.delete-btn:hover {
+.supprimer-button:hover {
     background-color: rgb(140, 0, 0);
 }
 
