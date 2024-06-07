@@ -15,7 +15,7 @@ class UtilisateurManager extends Manager{
         parent::connect();
     }
 
-    public function checkUserExists($email) {//permet de vérifier si l'utilisateur existe via son mail
+    public function checkUserExists($email) {//Requ^te qui permet de vérifier si l'utilisateur existe via son mail
         $sql ="SELECT * 
                 FROM ".$this->tableName. " t
                 WHERE email = :email";

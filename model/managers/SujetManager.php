@@ -28,26 +28,26 @@ class SujetManager extends Manager{
         );
     }
 
-        //fonction pour verrouiller un sujet
+        //Requête pour verrouiller un sujet
     public function lockSujet($id){//requête SQL pour update un sujet:
         $sql = "UPDATE sujet
                SET verrouillage = '1'
                WHERE id_sujet = :id";
 
-        return $this->getOneOrNullResult(
+        return $this->getOneOrNullResult(// affiche un seul ou aucun résultat
             DAO::update($sql, ['id' => $id]), //DAO::update et non select (cf DAO.php)        
             $this->className
         );
 
     }
 
-        //fonction pour déverrouiller un sujet
+        //Requête pour déverrouiller un sujet
     public function unlockSujet($id){//requête SQL pour update un sujet:
         $sql = "UPDATE sujet
                SET verrouillage = '0'
                WHERE id_sujet = :id";
 
-        return $this->getOneOrNullResult(
+        return $this->getOneOrNullResult(// affiche un seul ou aucun résultat
             DAO::update($sql, ['id' => $id]), //DAO::update et non select (cf DAO.php)        
             $this->className
         );

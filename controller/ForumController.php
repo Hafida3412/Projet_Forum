@@ -28,6 +28,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
     }
 
+    //Affichage des sujets par catégorie
     public function listSujetsByCategorie($id) {
 
         $sujetManager = new SujetManager();
@@ -45,6 +46,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
     }
 
+    //Affichage des messsages par sujet
     public function MessagesBySujet($id) {
 
         $messageManager = new MessageManager();
@@ -63,7 +65,7 @@ class ForumController extends AbstractController implements ControllerInterface{
      
     }
     
-   // Ajouter un sujet
+   //Ajouter un sujet
     public function addNewSujet($id) {// correspond à l'id categorie
 
         $sujetManager = new SujetManager();
@@ -117,8 +119,8 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
     //Supprimer un message
-
      public function supprimerMessage($id){
+
         $messageManager = new messageManager();
         $message = $messageManager->findOneById($id);
 
@@ -140,7 +142,6 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
     //Verrouiller un sujet
-
     public function verrouillerSujet ($id){
         
         $sujetManager = new SujetManager();
@@ -166,8 +167,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
     }
     
-    //Déverrouiller le sujet
-
+    //Déverrouiller un sujet
     public function deverrouillerSujet ($id){
         
         $sujetManager = new SujetManager();

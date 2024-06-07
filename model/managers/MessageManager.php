@@ -11,7 +11,8 @@ class MessageManager extends Manager{
     public function __construct(){
         parent::connect();
     }
-
+    
+    //Requête pour récupérer tous les sujets
     public function findMessagesBySujet($id) {
 
         $sql ="SELECT * 
@@ -25,14 +26,14 @@ class MessageManager extends Manager{
         );
     }
         
-
+    //Requête pour supprimer un message
     public function deleteMessage($id) {
         $sql ="DELETE
                 FROM ".$this->tableName. " t
                 WHERE id_message = :id";
-
+    //la requête renvoie un seul ou aucun résultat
         return  $this->getOneOrNullResult(
-            DAO::delete($sql, ['id' => $id]), 
+            DAO::delete($sql, ['id' => $id]), //on précise "delete"
             $this->className
         );
     }

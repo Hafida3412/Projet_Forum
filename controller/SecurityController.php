@@ -12,6 +12,8 @@ class SecurityController extends AbstractController{
      // contiendra les méthodes liées à l'authentification : register, login et logout
      // Affiche la vue du formulaire register
           //session_start();
+    
+    //MISE EN PLACE DE LA FONCTION S INSCRIRE
     public function register(){
     
            if (isset($_POST["submitRegister"])) {
@@ -61,7 +63,7 @@ class SecurityController extends AbstractController{
     }  
 
 
-
+    //MISE EN PLACE DE LA FONCTION SE CONNECTER
     public function login() {
 
             if(isset($_POST["submitLogin"])) {

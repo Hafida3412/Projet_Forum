@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>Se connecter</h1>
-        <form action="index.php?ctrl=security&action=login"method="post">
+        <form action="index.php?ctrl=security&action=login"method="post"><!--STRUCTURE DE L'URL POUR DECLENCHER UNE ACTION: INDEX.PHP?CTRL ACTION= METHOD= ID= -->
             <label for="email">Email</label>
             <input type="email" name="email" id="email" value="micka@exemple.com"><br>
 

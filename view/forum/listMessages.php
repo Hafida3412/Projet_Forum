@@ -48,6 +48,7 @@ if($messages) {
     <input type="submit" name = "submitMessage" value="Ajouter un message">
 </form>
 
+<!--alors impossible de poster car le sujet est verrouillé-->
 <?php } else {
     echo "<p>Vous ne pouvez plus poster car ce sujet est verrouillé !</p>";   
 }?>
