@@ -68,7 +68,7 @@ class SecurityController extends AbstractController{
         //On vérifie si le formulaire a été soumis
             if(isset($_POST["submitLogin"])) {
             //PROTECTION XSS (=FILTRES)
-            //Nettoie et valide l'email pour éviter les attaques XSS et les mails invalides
+//On nettoie et valide l'email pour éviter les attaques XSS et les mails invalides
                 $email = filter_input(INPUT_POST, "email", 
                 FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
             //Nettoie le mot de passe pour éviter les attaques XSS
@@ -76,23 +76,25 @@ class SecurityController extends AbstractController{
                 FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     
             //Si l'email et le password sont valides
-                if($email && $password) {/*REQUETE PREPARE POUR LUTTER CTRE 
-            LES INJECTIONS SQL*/
+                if($email && $password) {
                     // var_dump("ok");die;
-            //On crée une instance de la classe UtilisateurManager pour gérer les utilisateurs
+//On crée une instance de la classe UtilisateurManager pour gérer les utilisateurs
                     $userManager = new UtilisateurManager();
                 //On vérifie si l'ultilisateur existe dans la base de données
                     $utilisateur = $userManager->checkUserExists($email);
-
+                //Si l'utilisateur existe
                     if($utilisateur){//Si l'utilisateur existe
                         // var_dump($utilisateur);die;
-            //On récupère le mot de passe haché de l'utilisateur depuis la base de données
+/*On récupère le mot de passe haché de l'utilisateur depuis la base de données*/
                         $hash = $utilisateur->getPassword();
-
-                        if(password_verify($password, $hash)){//VERIFICATION DU MDP 
-                            $_SESSION["utilisateur"] = $utilisateur; //on stocke dans un tableau SESSION l'intégralité des infos du user
-                            header("Location:index.php?ctrl=home&action=index");//SI CONNEXION REUSSIE: REDIRECTION VERS PAGE D ACCUEIL
-                        //Dans Forum, la redirection sera par exemple: header("Location: index.php?ctrl=home&action=index&id=");    
+                        //VERIFICATION DU MOT DE PASSE 
+                        if(password_verify($password, $hash)){
+        //on stocke dans un tableau SESSION l'intégralité des infos du user   
+                            $_SESSION["utilisateur"] = $utilisateur; 
+                        //SI CONNEXION REUSSIE: REDIRECTION VERS PAGE D ACCUEIL
+                            header("Location:index.php?ctrl=home&action=index");
+                        /*Dans Forum, la redirection sera par exemple: 
+                        header("Location: index.php?ctrl=home&action=index&id=");*/    
                             exit;  
                         
                             } else {
