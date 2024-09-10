@@ -63,34 +63,37 @@ class SecurityController extends AbstractController{
     }  
 
 
-    //MISE EN PLACE DE LA FONCTION SE CONNECTER
-    public function login() {
-        //On vérifie si le formulaire a été soumis
-            if(isset($_POST["submitLogin"])) {
-            //PROTECTION XSS (=FILTRES)
+//MISE EN PLACE DE LA FONCTION SE CONNECTER
+public function login() {
+    //On vérifie si le formulaire a été soumis
+        if(isset($_POST["submitLogin"])) {
+
+//PROTECTION XSS (=FILTRES)
 //On nettoie et valide l'email pour éviter les attaques XSS et les mails invalides
-                $email = filter_input(INPUT_POST, "email", 
-                FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
-            //Nettoie le mot de passe pour éviter les attaques XSS
-                $password = filter_input(INPUT_POST, "password", 
-                FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+     $email = filter_input(INPUT_POST, "email", 
+            FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
+        //Nettoie le mot de passe pour éviter les attaques XSS
+        $password = filter_input(INPUT_POST, "password", 
+            FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     
             //Si l'email et le password sont valides
                 if($email && $password) {
                     // var_dump("ok");die;
+
 //On crée une instance de la classe UtilisateurManager pour gérer les utilisateurs
-                    $userManager = new UtilisateurManager();
-                //On vérifie si l'ultilisateur existe dans la base de données
-                    $utilisateur = $userManager->checkUserExists($email);
+            $userManager = new UtilisateurManager();
+            //On vérifie si l'ultilisateur existe dans la base de données
+                $utilisateur = $userManager->checkUserExists($email);
                 //Si l'utilisateur existe
                     if($utilisateur){//Si l'utilisateur existe
                         // var_dump($utilisateur);die;
+
 /*On récupère le mot de passe haché de l'utilisateur depuis la base de données*/
-                        $hash = $utilisateur->getPassword();
-                        //VERIFICATION DU MOT DE PASSE 
+                    $hash = $utilisateur->getPassword();
+                    //VERIFICATION DU MOT DE PASSE 
                         if(password_verify($password, $hash)){
-        //on stocke dans un tableau SESSION l'intégralité des infos du user   
-                            $_SESSION["utilisateur"] = $utilisateur; 
+//on stocke dans un tableau SESSION l'intégralité des infos du user   
+                        $_SESSION["utilisateur"] = $utilisateur; 
                         //SI CONNEXION REUSSIE: REDIRECTION VERS PAGE D ACCUEIL
                             header("Location:index.php?ctrl=home&action=index");
                         /*Dans Forum, la redirection sera par exemple: 
