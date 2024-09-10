@@ -65,24 +65,31 @@ class SecurityController extends AbstractController{
 
     //MISE EN PLACE DE LA FONCTION SE CONNECTER
     public function login() {
-
+        //On vérifie si le formulaire a été soumis
             if(isset($_POST["submitLogin"])) {
-       
-                //PROTECTION XSS (=FILTRES)
-                $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
-                $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            //PROTECTION XSS (=FILTRES)
+            //Nettoie et valide l'email pour éviter les attaques XSS et les mails invalides
+                $email = filter_input(INPUT_POST, "email", 
+                FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
+            //Nettoie le mot de passe pour éviter les attaques XSS
+                $password = filter_input(INPUT_POST, "password", 
+                FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     
-                if($email && $password) {//REQUETE PREPARE POUR LUTTER CTRE LES INJECTIONS SQL
+            //Si l'email et le password sont valides
+                if($email && $password) {/*REQUETE PREPARE POUR LUTTER CTRE 
+            LES INJECTIONS SQL*/
                     // var_dump("ok");die;
-                    //si l'utilisateur existe
+            //On crée une instance de la classe UtilisateurManager pour gérer les utilisateurs
                     $userManager = new UtilisateurManager();
+                //On vérifie si l'ultilisateur existe dans la base de données
                     $utilisateur = $userManager->checkUserExists($email);
 
-                    if($utilisateur){
+                    if($utilisateur){//Si l'utilisateur existe
                         // var_dump($utilisateur);die;
+            //On récupère le mot de passe haché de l'utilisateur depuis la base de données
                         $hash = $utilisateur->getPassword();
 
-                        if(password_verify($password, $hash)){//VERIFICATION DU MDP
+                        if(password_verify($password, $hash)){//VERIFICATION DU MDP 
                             $_SESSION["utilisateur"] = $utilisateur; //on stocke dans un tableau SESSION l'intégralité des infos du user
                             header("Location:index.php?ctrl=home&action=index");//SI CONNEXION REUSSIE: REDIRECTION VERS PAGE D ACCUEIL
                         //Dans Forum, la redirection sera par exemple: header("Location: index.php?ctrl=home&action=index&id=");    
